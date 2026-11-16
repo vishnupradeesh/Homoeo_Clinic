@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+fastmcp
+pydantic
+sqlalchemy
+email-validator
+pyjwt
+python-dotenv
+twilio
+google-auth

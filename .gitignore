@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Environment / secrets
+.env
+
+# Local database
+clinic.db
+
+# Node
+node_modules/
+dist/
+# Runtime artifacts
+*.log
+backend/users
+backend/users;

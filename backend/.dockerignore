@@ -1,0 +1,13 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Local database & secrets (recreated / provided at runtime)
+clinic.db
+.env
+
+# Misc
+.pytest_cache/
+.mypy_cache/

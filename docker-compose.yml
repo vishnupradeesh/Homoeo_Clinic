@@ -1,0 +1,30 @@
+services:
+  backend:
+    build: ./backend
+    container_name: homoeo-backend
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      # Reach an Ollama instance running on the host machine (optional).
+      # The chatbot falls back to rule-based replies if Ollama is unavailable.
+      OLLAMA_HOST: "http://host.docker.internal:11434"
+      OLLAMA_MODEL: "llama3.2:1b"
+    extra_hosts:
+      # Lets the container resolve the host on Linux (already works on Win/Mac).
+      - "host.docker.internal:host-gateway"
+    volumes:
+      # Live code + persists the SQLite database (backend/clinic.db) on the host.
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build: ./frontend
+    container_name: homoeo-frontend
+    ports:
+      - "127.0.0.1:5173:5173"
+    volumes:
+      # Live code from the host; keep the container's own node_modules.
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
